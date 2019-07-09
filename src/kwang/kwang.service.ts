@@ -4,9 +4,14 @@ import { Kwang } from './class/kwang.class';
 
 @Injectable()
 export class KwangService {
-  private readonly kwangs: Database<any>;
+  private readonly kwangs: Database<Kwang>;
 
   async newKwang(kwang: Kwang) {
+    await this.kwangs.insert(kwang);
     return;
+  }
+
+  async getKwang(deviceId: string) {
+    return this.kwangs.find({ deviceId });
   }
 }

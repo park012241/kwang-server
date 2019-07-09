@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Put, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put, ValidationPipe } from '@nestjs/common';
 import { KwangService } from './kwang.service';
 import { NewKwangDto } from './dto/new-kwang.dto';
 import { Kwang } from './class/kwang.class';
@@ -17,7 +17,7 @@ export class KwangController {
   }
 
   @Get()
-  async getKwang() {
-    return;
+  async getKwang(@Param('deviceId') deviceId: string) {
+    return deviceId ? await this.kwangService.getKwang(deviceId) : [];
   }
 }

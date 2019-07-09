@@ -20,7 +20,7 @@ export class Database<T> {
     this.collection = this.mongoClient.db().collection<T>(this.collectionName);
   }
 
-  private async insert(data: T | T[]): Promise<{ [keys: number]: ObjectId }> {
+  async insert(data: T | T[]): Promise<{ [keys: number]: ObjectId }> {
     return !(data instanceof Array) ?
       [(await this.collection.insertOne(data)).insertedId] :
       (await this.collection.insertMany(data)).insertedIds;
