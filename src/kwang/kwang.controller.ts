@@ -18,6 +18,6 @@ export class KwangController {
 
   @Get()
   async getKwang(@Param('deviceId') deviceId: string) {
-    return deviceId ? await this.kwangService.getKwang(deviceId) : [];
+    return await this.kwangService.getKwang(deviceId);
   }
 }
