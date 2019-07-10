@@ -6,6 +6,13 @@ import { Kwang } from './class/kwang.class';
 export class KwangService {
   private readonly kwangs: Database<Kwang>;
 
+  constructor() {
+    this.kwangs = new Database<Kwang>({
+      mongoDBUri: process.env.MONGODB_URI,
+      collectionName: 'kwangs',
+    });
+  }
+
   async newKwang(kwang: Kwang) {
     await this.kwangs.insert(kwang);
     return;
