@@ -21,6 +21,9 @@ export class Database<T> {
   }
 
   async insert(data: T | T[]): Promise<{ [keys: number]: ObjectId }> {
+    if (!this.collection) {
+      await this.connect();
+    }
     return !(data instanceof Array) ?
       [(await this.collection.insertOne(data)).insertedId] :
       (await this.collection.insertMany(data)).insertedIds;
